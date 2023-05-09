@@ -1,0 +1,72 @@
+{
+    "Machines": {
+		
+        "uefi": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "64bit",
+                "PART_TABLE_TYPE": "gpt",
+                "QEMUCPU": "Nehalem",
+                "QEMUCPUS": "2",
+                "QEMURAM": "3072",
+                "QEMUVGA": "virtio",
+                "XRES": "1024",
+                "YRES": "768",
+                "QEMU_MAX_MIGRATION_TIME": "480",
+                "QEMU_VIRTIO_RNG": "1",
+                "UEFI": "1",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
+                "WORKER_CLASS": "qemu_x86_64"
+            }
+        },
+        "64bit":{
+         "backend":"qemu",
+         "settings":{
+            "ARCH_BASE_MACHINE":"64bit",
+            "PART_TABLE_TYPE":"mbr",
+            "QEMUCPU":"Nehalem",
+            "QEMUCPUS":"2",
+            "QEMURAM":"2048",
+            "QEMUVGA":"virtio",
+            "QEMU_VIRTIO_RNG":"1",
+            "WORKER_CLASS":"qemu_x86_64"
+         }
+      }
+    },
+    "Products": {
+        "v3gateway-dev-x86_64": {
+            "arch": "x86_64",
+            "distri": "rhel",
+            "flavor": "dev",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        }
+    },
+    "Profiles": {
+        "v3gateway-dev-x86_64": {
+            "machine": "uefi",
+            "product": "v3gateway-dev-x86_64"
+        }
+        },
+    "TestSuites": {
+        "install_default_upload": {
+            "profiles": {
+                "v3gateway-dev-x86_64": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "STARTSTOP": "true",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        }
+    }
+}

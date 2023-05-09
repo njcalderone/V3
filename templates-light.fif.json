@@ -1,0 +1,66 @@
+{
+   "Machines":{
+      "64bit":{
+         "backend":"qemu",
+         "settings":{
+            "ARCH_BASE_MACHINE":"64bit",
+            "PART_TABLE_TYPE":"mbr",
+            "QEMUCPU":"Nehalem",
+            "QEMUCPUS":"2",
+            "QEMURAM":"2048",
+            "QEMUVGA":"virtio",
+            "QEMU_VIRTIO_RNG":"1",
+            "WORKER_CLASS":"qemu_x86_64"
+         }
+      }
+   },
+   "Products":{
+      "v3gateway-dev-x86_64":{
+         "arch":"x86_64",
+         "distri":"rhel",
+         "flavor":"dev",
+         "settings":{
+            "DESKTOP":"gnome",
+            "DEPLOY_UPLOAD_TEST":"install_default_upload",
+            "HDDSIZEGB":"20",
+            "LIVE":"1",
+            "PACKAGE_SET":"default",
+            "TEST_TARGET":"ISO"
+         },
+         "version":"*"
+      }
+   },
+   "Profiles":{
+      "v3gateway-dev-x86_64":{
+         "machine":"64bit",
+         "product":"v3gateway-dev-x86_64"
+      }
+   },
+   "TestSuites":{
+      "bootloader":{
+         "profiles":{
+            "v3gateway-dev-x86_64":20
+         },
+         "settings":{
+            "BOOTFROM":"c",
+            "HDD_1":"disk_%FLAVOR%_%MACHINE%.qcow2",
+            "POSTINSTALL_PATH":"tests/installation/bootloader",
+            "START_AFTER_TEST":""
+         }
+      },
+      "wxdemo":{
+         "profiles":{
+            "v3gateway-dev-x86_64":20
+         },
+         "settings":{
+            "BOOTFROM":"c",
+            "HDD_1":"disk_%FLAVOR%_%MACHINE%.qcow2",
+            "POSTINSTALL_PATH":"tests/applications/wxdemo",
+            "START_AFTER_TEST":"",
+	        "_SKIP_POST_FAIL_HOOKS": 1,
+	        "TESTDEBUG": 1,
+	        "_setup_done": 1
+         }
+      }
+   }
+}

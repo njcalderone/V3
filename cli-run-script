@@ -1,0 +1,1 @@
+openqa-cli api -X post isos   ISO=v3-gateway-iso-v3-dev-1.0.0.0-20-dev.iso    DISTRI=V3_Gateway     VERSION="*"     FLAVOR=dev      ARCH=x86_64 
